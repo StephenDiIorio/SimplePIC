@@ -4,7 +4,7 @@
 using namespace std;
 
 #include "Simulation.h"
-#include "uh.h"
+#include "two_stream.h"
 
 int main()
 {

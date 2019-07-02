@@ -52,7 +52,7 @@ void landau(Species &spec, uint Npar)
 
         x_mom = (gaussian() * vth) + ((wp / k) * (pert / spec.Qpar) * cos(k * x_tot));
 
-        spec.parts.push_back(Particle(x_tot, 0.0, 0.0, x_mom, 0.0, 0.0, Wpar));
+        spec.add_particle(x_tot, 0.0, 0.0, x_mom, 0.0, 0.0, Wpar);
     }
 }
 
@@ -76,9 +76,9 @@ void Simulation::init_simulation()
     const uint ppc = 256;
     const uint npar = ppc * Nx;
     const double density = 1.0;
-    this->spec.push_back(Species(npar, this->Nx, Qpar, density, landau));
+    this->add_species(npar, Qpar, density, landau);
 
     // Initialize fields
-    this->e_field = Field(this->Nx, init_e_field);
-    this->b_field = Field(this->Nx, init_b_field);
+    this->add_e_field(init_e_field);
+    this->add_b_field(init_b_field);
 }

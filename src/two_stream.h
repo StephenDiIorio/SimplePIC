@@ -56,7 +56,7 @@ void two_stream(Species &spec, uint Npar)
             x_mom = -3.0;
         }
 
-        spec.parts.push_back(Particle(x_tot, 0.0, 0.0, x_mom, 0.0, 0.0, Wpar));
+        spec.add_particle(x_tot, 0.0, 0.0, x_mom, 0.0, 0.0, Wpar);
     }
     //TODO: call species BC here?
 }
@@ -85,7 +85,7 @@ void two_stream_plus(Species &spec, uint Npar)
 
         x_mom = 3.0;
 
-        spec.parts.push_back(Particle(x_tot, 0.0, 0.0, x_mom, 0.0, 0.0, Wpar));
+        spec.add_particle(x_tot, 0.0, 0.0, x_mom, 0.0, 0.0, Wpar);
     }
     //TODO: call species BC here?
 }
@@ -114,7 +114,7 @@ void two_stream_minus(Species &spec, uint Npar)
 
         x_mom = -3.0;
 
-        spec.parts.push_back(Particle(x_tot, 0.0, 0.0, x_mom, 0.0, 0.0, Wpar));
+        spec.add_particle(x_tot, 0.0, 0.0, x_mom, 0.0, 0.0, Wpar);
     }
     //TODO: call species BC here?
 }
@@ -147,16 +147,16 @@ void Simulation::init_simulation()
     const uint ppc1 = 64;
     const uint npar1 = ppc1 * Nx;
     const double density1 = 1.0;
-    this->spec.push_back(Species(npar1, this->Nx, Qpar1, density1, two_stream_plus));
+    this->add_species(npar1, Qpar1, density1, two_stream_plus);
 
     // Attributes for species 2
     const double Qpar2 = 1.0; // charge of particle
     const uint ppc2 = 64;
     const uint npar2 = ppc2 * Nx;
     const double density2 = 1.0;
-    this->spec.push_back(Species(npar2, this->Nx, Qpar2, density2, two_stream_minus));
+    this->add_species(npar2, Qpar2, density2, two_stream_minus);
 
     // Initialize fields
-    this->e_field = Field(this->Nx, init_e_field);
-    this->b_field = Field(this->Nx, init_b_field);
+    this->add_e_field(init_e_field);
+    this->add_b_field(init_b_field);
 }

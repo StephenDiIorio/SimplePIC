@@ -45,7 +45,7 @@ void beam(Species &spec, uint Npar)
 
         x_mom = 3.0;
 
-        spec.parts.push_back(Particle(x_pos, 0.0, 0.0, x_mom, 0.0, 0.0, Wpar));
+        spec.add_particle(x_pos, 0.0, 0.0, x_mom, 0.0, 0.0, Wpar);
     }
     //TODO: call species BC here?
 }
@@ -70,7 +70,7 @@ void plasma(Species &spec, uint Npar)
 
         x_mom = 0.1 * gaussian();
 
-        spec.parts.push_back(Particle(x_pos, 0.0, 0.0, x_mom, 0.0, 0.0, Wpar));
+        spec.add_particle(x_pos, 0.0, 0.0, x_mom, 0.0, 0.0, Wpar);
     }
     //TODO: call species BC here?
 }
@@ -103,7 +103,7 @@ void single_plasma(Species &spec, uint Npar)
             x_mom = 0.1 * gaussian();
         }
 
-        spec.parts.push_back(Particle(x_pos, 0.0, 0.0, x_mom, 0.0, 0.0, Wpar));
+        spec.add_particle(x_pos, 0.0, 0.0, x_mom, 0.0, 0.0, Wpar);
     }
     //TODO: call species BC here?
 }
@@ -129,16 +129,16 @@ void Simulation::init_simulation()
     const uint ppc_b = 256;
     const uint npar_b = ppc_b * Nx;
     const double density_b = 1.0;
-    this->spec.push_back(Species(npar_b, this->Nx, Qpar_b, density_b, beam));
+    this->add_species(npar_b, Qpar_b, density_b, beam);
 
     // Attributes for plasma
     const double Qpar_p = -1.0;
     const uint ppc_p = 256;
     const uint npar_p = ppc_p * Nx;
     const double density_p = 1.0;
-    this->spec.push_back(Species(npar_p, this->Nx, Qpar_p, density_p, plasma));
+    this->add_species(npar_p, Qpar_p, density_p, plasma);
 
     // Initialize fields
-    this->e_field = Field(this->Nx, init_e_field);
-    this->b_field = Field(this->Nx, init_b_field);
+    this->add_e_field(init_e_field);
+    this->add_b_field(init_b_field);
 }
