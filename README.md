@@ -8,10 +8,10 @@ A few examples of how this is done can be seen in uh.h (upper hybrid waves), two
 The pictures below are meant to showcase some of the capabilities of this code.
 
 Two-Stream Instability:
-![alt text](img/ts.pdf "Two-Stream Instability")
+![](/img/ts.png "Two-Stream Instability")
 
 Beam-Plasma Instability:
-![alt text](img/bp.png "Beam-Plasma Instability")
+![](/img/bp.png "Beam-Plasma Instability")
 
 Landau Damping:
-![alt text](img/landau.png "Landau Damping")
+![](/img/landau.png "Landau Damping")
